@@ -1,0 +1,39 @@
+<footer class="site-footer mt-l-xl p-s-m">
+  <div class="wrapper">
+    <div class="cluster gutter-xs">
+      <nav class="cluster text-step-0" aria-label="{{ meta.navigation.ariaBottom }}">
+        {% for item in navigation.bottom %}
+          <a
+            href="{{ item.url }}"
+            {{
+              helpers.getLinkActiveState(item.url,
+              page.url)
+              |
+              safe
+            }}
+            >{{ item.text }}</a
+          >
+        {% endfor %}
+	<b>Email:</b> {{ meta.creator.email }}
+      </nav>
+
+      <nav class="cluster" aria-label="{{ meta.navigation.ariaPlatforms }}">
+        <!-- gets the first item from the feed loop set in meta -->
+
+        {% for key, value in personal.platforms %}
+          {% if value != "" %}
+            <!-- regular platforms -->
+            <a class="no-indicator button" data-icon href="{{ value }}" rel="me">
+              <span class="visually-hidden">{{ key | capitalize }}</span>
+              {% svg 'platform/' + key %}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    </div>
+
+    {% include 'partials/theme-switch.njk' %}
+
+    <aside class="creator | cluster gutter-2xs text-step-min-1 mt-xl"></aside>
+  </div>
+</footer>
